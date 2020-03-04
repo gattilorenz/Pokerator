@@ -20,7 +20,7 @@ def get_template(edgetype):
     :param edgetype: a string that is one of the conceptNet edgetypes
     :return: template for the edgetype that is specified in the excel and expected POS type
     """
-    xls = pd.ExcelFile('Data\APNLP_templates.xlsx')
+    xls = pd.ExcelFile('Data/APNLP_templates.xlsx')
     df = pd.read_excel(xls, edgetype)
     templates = df.values.tolist()
     chosen_t = random.choice(templates)
