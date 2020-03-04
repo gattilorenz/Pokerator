@@ -20,7 +20,7 @@ if __name__== "__main__":
     blended_words, w1, w2 = blend_a_word(answers)
     pokemon = evaluation_name(blended_words)
     while True:
-        description = build_description([w1, w2], pokemon, 'run750')
+        description = build_description([w1, w2], pokemon)
         if check_description_is_novel(description):
             break
     print(pokemon.upper())

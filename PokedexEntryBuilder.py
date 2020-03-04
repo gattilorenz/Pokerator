@@ -13,7 +13,10 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 os.environ['KMP_WARNINGS'] = 'off'
 
 check = Speller(lang='en')
+
+#Initialize Tensorflow and load the 750 checkpoint
 sess = gpt2.start_tf_sess()
+run = 'run750'
 try:
 	gpt2.load_gpt2(sess, run_name=run)
 except:
@@ -93,7 +96,7 @@ def build_sentence(word):
             return sentence
 
 
-def build_description(answers, name, run):
+def build_description(answers, name):
     """
     Function to write the description of the Pokemon, randomly select 2 sentences
 
@@ -105,7 +108,7 @@ def build_description(answers, name, run):
     description = build_sentence(answer.lower())
     if description is None:
         description = name.capitalize()
-    description = generation_gpt2(description, name, run)
+    description = generation_gpt2(description, name)
     return description
 
 
@@ -123,7 +126,7 @@ def filter_pokemon_names(desc, name):
     return desc
 
 
-def generation_gpt2(input_sent, name, run):
+def generation_gpt2(input_sent, name):
     """
     Generates a longer description based on the input sentence from concept net. It uses the gpt2 model trained on
     real Pokedex entries.
