@@ -5,12 +5,20 @@ import pandas as pd
 import random
 import ConceptNet as cn
 import spacy
-from spellchecker import SpellChecker
+from autocorrect import Speller
 import gpt_2_simple as gpt2
 import os
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 os.environ['KMP_WARNINGS'] = 'off'
+
+check = Speller(lang='en')
+sess = gpt2.start_tf_sess()
+try:
+	gpt2.load_gpt2(sess, run_name=run)
+except:
+	gpt2.download_gpt2()
+	gpt2.load_gpt2(sess, run_name=run)
 
 
 def get_template(edgetype):
@@ -62,12 +70,7 @@ def check_spelling(word):
     :param word: a word (answer by user)
     :return: correctly spelled word
     """
-    spell = SpellChecker()
-    mispelled = spell.unknown([word])
-    if len(mispelled) > 0:
-        return spell.correction(word)
-    else:
-        return word
+    return check(word)
 
 
 def build_sentence(word):
@@ -102,7 +105,7 @@ def build_description(answers, name, run):
     description = build_sentence(answer.lower())
     if description is None:
         description = name.capitalize()
-    description = generation_gtp2(description, name, run)
+    description = generation_gpt2(description, name, run)
     return description
 
 
@@ -120,9 +123,9 @@ def filter_pokemon_names(desc, name):
     return desc
 
 
-def generation_gtp2(input_sent, name, run):
+def generation_gpt2(input_sent, name, run):
     """
-    Generates a longer description based on the input sentence from concept net. It uses the gtp2 model trained on
+    Generates a longer description based on the input sentence from concept net. It uses the gpt2 model trained on
     real Pokedex entries.
 
     :param input_sent: input senteence from ConceptNet
@@ -130,12 +133,6 @@ def generation_gtp2(input_sent, name, run):
     :return: the description for the Pokemon
     """
     input_sent += ' '
-    sess = gpt2.start_tf_sess()
-    try:
-        gpt2.load_gpt2(sess, run_name=run)
-    except:
-        gpt2.download_gpt2()
-        gpt2.load_gpt2(sess, run_name=run)
     desc = gpt2.generate(sess, run_name=run, length=100, prefix=input_sent, return_as_list=True)[0]
     desc = filter_pokemon_names(desc, name)
     desc = desc.replace('. ', '.')
