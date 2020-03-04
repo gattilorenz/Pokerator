@@ -11,8 +11,8 @@ def load_desc_data():
     Function to load the description dataset from the Pokedex
     :return: description data in a string
     """
-    with open("Data/pokedex_descriptions.txt", "r", encoding="utf8") as file:
-        data = file.read().replace("\n", " ")
+    with open("Data/pokedex_allgens.txt", "r", encoding="utf8") as file:
+        data = file.readlines()
     return data
 
 
