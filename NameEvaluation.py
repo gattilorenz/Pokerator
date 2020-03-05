@@ -13,7 +13,6 @@ from nltk.util import ngrams
 import math
 import re
 import operator
-nltk.download('cmudict')
 
 
 def load_poke_data():
