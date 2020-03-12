@@ -1,99 +1,4 @@
-.tctc-button,.job-footer a.button,.cooptation-footer .button,.cooptation-block__contact .button{
-    font-family:'Montserrat', sans-serif;
-    letter-spacing:1px;
-    -webkit-font-smoothing:antialiased;
-    border-radius:10px;
-    box-shadow:0 0 0 0;
-    background-color:#f3c600;
-    border-color:#f3c600;
-    border-style:solid;
-    color:#fff;
-    cursor:pointer;
-    font-size:14px;
-    font-weight:bold;
-    width:205px;
-    height:60px;
-    text-transform:uppercase;
-    transition:background-color 500ms ease, border 500ms ease, border-radius 500ms ease, border-color 500ms ease;
-    outline:0
-}
-.tctc-button.opened,.job-footer a.opened.button,.cooptation-footer .opened.button,.cooptation-block__contact .opened.button,.tctc-button:hover,.job-footer a.button:hover,.cooptation-footer .button:hover,.cooptation-block__contact .button:hover{
-    background-color:#a0d1c5;
-    border-color:#a0d1c5
-}
-.tctc-button.opened,.job-footer a.opened.button,.cooptation-footer .opened.button,.cooptation-block__contact .opened.button{
-    border-top-left-radius:0;
-    border-bottom-left-radius:0
-}
-.tctc-button.opened:hover,.job-footer a.opened.button:hover,.cooptation-footer .opened.button:hover,.cooptation-block__contact .opened.button:hover{
-    border-color:#60919f;
-    background-color:#60919f
-}
-.btn-cta{
-    font-family:'Montserrat', sans-serif;
-    letter-spacing:1px;
-    -webkit-font-smoothing:antialiased;
-    border-radius:10px;
-    background-color:#f3c600;
-    color:#fff;
-    cursor:pointer;
-    font-size:14px;
-    font-weight:bold;
-    text-transform:uppercase;
-    transition:background-color 500ms ease, border 500ms ease, border-radius 500ms ease, border-color 500ms ease;
-    outline:0;
-    padding:14px 35px;
-    display:inline-block
-}
-.btn-cta.opened,.btn-cta:hover{
-    background-color:#a0d1c5;
-    border-color:#a0d1c5
-}
-.btn-cta.opened{
-    border-top-left-radius:0;
-    border-bottom-left-radius:0
-}
-.btn-cta.opened:hover{
-    border-color:#60919f;
-    background-color:#60919f
-}
-.responsive-img{
-    width:auto;
-    max-width:100%
-}
-.align-center{
-    text-align:center
-}
-.btn-primary{
-    font-family:'Montserrat', sans-serif;
-    font-weight:bold;
-    letter-spacing:1px;
-    -webkit-font-smoothing:antialiased;
-    border-radius:10px;
-    background-color:#f3c600;
-    display:inline-block;
-    color:#fff;
-    font-size:12px;
-    text-transform:uppercase;
-    padding:20px 30px;
-    letter-spacing:1px;
-    transition:background-color 500ms ease
-}
-.btn-primary:hover{
-    background-color:#a0d1c5;
-    color:#fff
-}
-.btn-primary--blue{
-    background:#61919e
-}
-.title-section{
-    font-family:'Montserrat', sans-serif;
-    font-weight:600;
-    letter-spacing:1px;
-    -webkit-font-smoothing:antialiased;
-    font-size:30px;
-    color:#404040
-}
+
 body,h1,h2,h3,h4,h5,h6,p,blockquote,pre,hr,dl,dd,ol,ul,figure{
     margin:0;
     padding:0
@@ -21549,7 +21454,7 @@ header .logo-techos img{
 	margin-right: 15px;
 	font-family:'LCDDot Regular';
 	font-weight:normal;
-	font-size:16px;
+	font-size:15px;
 	animation: type 1s steps(60, end);
 }
 
@@ -21564,7 +21469,7 @@ header .logo-techos img{
 
 @keyframes type{
         from{opacity: 0;}
-      }
+}
       
 
 
@@ -21581,4 +21486,12 @@ font-family: "Pokemon GB";
 font-style: normal;
 font-weight: normal;
 src: local("Pokemon GB"), url("lcddot.woff") format("woff");
+}
+
+#pokeball {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom-style: solid;
+    border-bottom-width: 5px;
+    background-color: #ee1515;
 }

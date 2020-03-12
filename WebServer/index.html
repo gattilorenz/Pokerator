@@ -3,10 +3,12 @@
 <html>
 <head>
  <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="style2.css">
+<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body style="width:100%";>
-<img src="logo.png" style="width:40%; margin: 0 auto">
+<div id="pokeball">
+	<img src="logo.png" style="width:40%; margin: 0 auto">
+</div>
 <div style="width:750px; margin: 0 auto";>
     <div id="left">
       <div id="top-left"></div>
@@ -24,7 +26,7 @@
       <div id="border-screen">
         <div id="button-top1"></div>
         <div id="button-top2"></div>
-        <div id="button-bottom" onclick="changePicturePokemon()"></div>
+        <div id="button-bottom"></div>
         <p class="selectDisable">≡≡</p>
       </div>
       <div id="screen">
@@ -42,17 +44,17 @@
         <div id="mid-cross">
           <div id="mid-circle"></div>
         </div>
-        <div id="top-cross" onclick="increaseIdPokemon()">
+        <div id="top-cross" onclick="reset()">
           <div id="upC"></div>
         </div>
         <div id="right-cross">
-          <div id="rightC"></div>
+          <div id="rightC" onclick="reset()"></div>
         </div>
-        <div id="bot-cross" onclick="decreaseIdPokemon()">
+        <div id="bot-cross" onclick="reset()">
           <div id="downC"></div>
         </div>
         <div id="left-cross">
-          <div id="leftC"></div>
+          <div id="leftC" onclick="reset()"></div>
         </div>
       </div>
     </div>
@@ -103,15 +105,22 @@
 
 </body>
 <script>
-document.getElementById('name').style.display = "none";
-document.getElementById('dashes').style.display = "none";
-document.getElementById('description').style.display = "none";
-document.getElementById('egg-animation').style.display = "none";
+
+reset();
+//make every button reset the status
+var buttons = document.querySelectorAll('[id*=button]');
+for (const button of buttons){
+	button.addEventListener("click", reset); 
+}
+document.getElementById('square-button-left').removeEventListener("click",reset);
 
 var answers = {};
 var name = "";
 
 
+
+//set up the input so that Enter submits the answer (to JS, calling AddNextQuestion) 
+//and clears the textfield
 var input = document.getElementById('nb');
 input.addEventListener("keyup", function(event) {
   // Number 13 is the "Enter" key on the keyboard
@@ -120,6 +129,7 @@ input.addEventListener("keyup", function(event) {
     addNextQuestion(input.value);
   }
 }); 
+//give focus so the cursor will blink, and the user can see where to type
 input.focus()
 
 
@@ -163,7 +173,10 @@ function addNextQuestion(lastAnswer) {
 	  case "music":
 	  	question.setAttribute('name', 'finished');
 		sendAnswers()
-		break;  	
+		break;
+	  case "finished":
+	    reset();  	
+	    break;
 	  default:
 	    console.log("unrecognized question type: "+lastQuestionType);
 		
@@ -214,6 +227,21 @@ function sendAnswers () {
 	xmlhttp.setRequestHeader("Content-Type", "application/json");
 	xmlhttp.send(JSON.stringify(answers));
 	document.getElementById('egg-animation').style.display = "block";
+}
+
+function reset() {
+	var question = document.getElementById("question");
+	question.setAttribute('name',"name");
+	question.innerHTML = "Hello, Trainer!<br/>What's your name?";
+	question.style.animation = "none";
+	question.offsetHeight;
+	question.style.animation = null;	
+	//hide provisionary name & description
+	document.getElementById('name').style.display = "none";
+	document.getElementById('dashes').style.display = "none";
+	document.getElementById('description').style.display = "none";
+	document.getElementById('egg-animation').style.display = "none";
+	
 }
 
 </script>
