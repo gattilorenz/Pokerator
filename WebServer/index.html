@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+ <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="style2.css">
+</head>
+<body style="width:100%";>
+<img src="logo.png" style="width:40%; margin: 0 auto">
+<div style="width:750px; margin: 0 auto";>
+    <div id="left">
+      <div id="top-left"></div>
+      <div id="top-left1">
+        <div id="glass-button">
+          <div id="reflect"></div>
+        </div>
+        <div id="top-buttons">
+          <div id="top-button-red"></div>
+          <div id="top-button-yellow"></div>
+          <div id="top-button-green"></div>
+        </div>
+      </div>
+      <div id="top-left2"></div>
+      <div id="border-screen">
+        <div id="button-top1"></div>
+        <div id="button-top2"></div>
+        <div id="button-bottom" onclick="changePicturePokemon()"></div>
+        <p class="selectDisable">≡≡</p>
+      </div>
+      <div id="screen">
+      	<img id="egg-animation" class="selectDisable" src="animation-egg-shakes.gif" alt="">
+      	<div id="question" name="name">Hello, Trainer!<br/>What's your name?</div>
+      </div>
+      <div id="triangle"></div>
+      <div id="blue-button-left"></div>
+      <div id="green-button-left"></div>
+      <div id="orange-button-left"></div>
+      <div id="square-button-left">
+        <input id="nb" type="text" name="howmuch" value="" data-cip-id="nb">
+      </div>
+      <div id="cross">
+        <div id="mid-cross">
+          <div id="mid-circle"></div>
+        </div>
+        <div id="top-cross" onclick="increaseIdPokemon()">
+          <div id="upC"></div>
+        </div>
+        <div id="right-cross">
+          <div id="rightC"></div>
+        </div>
+        <div id="bot-cross" onclick="decreaseIdPokemon()">
+          <div id="downC"></div>
+        </div>
+        <div id="left-cross">
+          <div id="leftC"></div>
+        </div>
+      </div>
+    </div>
+      <div id="middle">
+        <div id="hinge1"></div>
+        <div id="hinge2"></div>
+        <div id="hinge3"></div>
+      </div>
+    <div id="right">
+      <div id="info-screen">
+      <div id="name">Bulbasaur</div>
+      <div id="dashes">------------</div>
+      <div id="description">Some kind of long text here, or maybe shorter, but probably more than one line</div>
+      </div>
+      <!--  Removed for Pokérator
+<div id="keyboard">
+        <div class="key"></div>
+        <div class="key"></div>
+        <div class="key"></div>
+        <div class="key"></div>
+        <div class="key"></div>
+        <div class="key"></div>
+        <div class="key"></div>
+        <div class="key"></div>
+        <div class="key"></div>
+        <div class="key"></div>
+      </div>
+ -->
+      <div id="leaf-button-right"></div>
+      <div id="yellow-button-right"></div>
+      <div id="green-button-right"></div>
+      <div id="orange-button-right"></div>
+      <div id="left-cross-button">
+        <div id="leftT"></div>
+      </div>
+      <div id="right-cross-button">
+        <div id="rightT"></div>
+      </div>
+      <div id="cross-button">
+        <div id="left-red-cross"></div>
+      </div>
+      <div id="square-button-right1"></div>
+      <div id="square-button-right2"></div>
+    </div>
+      <div id="top-right1"></div>
+      <div id="top-right2"></div>
+</div>
+
+</body>
+<script>
+document.getElementById('name').style.display = "none";
+document.getElementById('dashes').style.display = "none";
+document.getElementById('description').style.display = "none";
+document.getElementById('egg-animation').style.display = "none";
+
+var answers = {};
+var name = "";
+
+
+var input = document.getElementById('nb');
+input.addEventListener("keyup", function(event) {
+  // Number 13 is the "Enter" key on the keyboard
+  if (event.keyCode === 13 && input.value) {
+    event.preventDefault();
+    addNextQuestion(input.value);
+  }
+}); 
+input.focus()
+
+
+function addNextQuestion(lastAnswer) {
+	var question = document.getElementById('question');
+	var lastQuestionType = question.getAttribute("name");
+	if (lastAnswer.toLowerCase() !== "no" && lastAnswer.toLowerCase() !== "none"){
+		answers[lastQuestionType] = lastAnswer;
+	}
+	input.value = "";
+	switch(lastQuestionType) {
+	  case "name":
+		name = lastAnswer;
+		question.setAttribute('name', 'month');
+		question.innerHTML = 'Nice to meet you, '+name+'!\nWhat is your birth month?';
+		break;
+	  case "month":
+        question.setAttribute('name', 'animal');
+		question.innerHTML = 'And do you have a favorite animal?'
+	  	break;
+	  case "animal":
+		question.setAttribute('name', 'plant');
+		question.innerHTML = 'What about a plant? Anything you like among the green world?';
+		break;  
+	  case "plant":
+		question.setAttribute('name', 'hobby');
+		question.innerHTML = 'Cool!\nDo you have any special hobby?';	  
+		break;  
+	  case "hobby":
+		question.setAttribute('name', 'food');
+		question.innerHTML = name+', you must have a favorite food!\nWhat is it?';
+		break;  
+	  case "food":
+		question.setAttribute('name', 'color');
+		question.innerHTML = 'Almost done, I swear... I\'d like to know your favorite color!';
+		break;  
+	  case "color":
+		question.setAttribute('name', 'music');
+		question.innerHTML = 'Ok, one last question!\nWhat is your favourite music genre?';
+		break;  
+	  case "music":
+	  	question.setAttribute('name', 'finished');
+		sendAnswers()
+		break;  	
+	  default:
+	    console.log("unrecognized question type: "+lastQuestionType);
+		
+	}
+	question.style.animation = "none";
+	question.offsetHeight;
+	question.style.animation = null;
+	
+}
+
+function sendAnswers () {
+	var question = document.getElementById('question');
+	question.innerHTML = 'Let me think...';
+	question.style.animation = "none";
+	question.offsetHeight;
+	question.style.animation = null;
+	
+	var xmlhttp = new XMLHttpRequest();
+	
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+        	var question = document.getElementById('question');
+			var generatedStuff = JSON.parse(this.responseText);
+			if(generatedStuff['STATUS'] === 'OK') {
+				document.getElementById('name').innerHTML = generatedStuff['name'];
+				document.getElementById('name').style.display = "block";
+				document.getElementById('dashes').style.display = "block";
+				document.getElementById('description').innerHTML = generatedStuff['description'];
+				document.getElementById('description').style.display = "block";
+				question.innerHTML = 'Found it!\nThat\'s your inner Pokémon!';
+				question.style.animation = "none";
+				question.offsetHeight;
+				question.style.animation = null;								
+			}
+			else {
+				document.getElementById('egg-animation').style.display = "none";
+				question.innerHTML = 'Unfortunately I can\'t find your inner Pokémon in here... Try again clicking any button';				
+				question.style.animation = "none";
+				question.offsetHeight;
+				question.style.animation = null;
+			}
+			
+       }
+    };	
+	
+	
+	xmlhttp.open("POST", "/generate");
+	xmlhttp.setRequestHeader("Content-Type", "application/json");
+	xmlhttp.send(JSON.stringify(answers));
+	document.getElementById('egg-animation').style.display = "block";
+}
+
+</script>
+
+</html>
