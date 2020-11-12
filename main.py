@@ -19,7 +19,7 @@ if __name__== "__main__":
     print('The egg is hatching...')
     blended_words, w1, w2 = blend_a_word(answers)
     pokemon = evaluation_name(blended_words)
-    while True:
+    for retry in range (1,5):
         description = build_description([w1, w2], pokemon)
         if check_description_is_novel(description):
             break
